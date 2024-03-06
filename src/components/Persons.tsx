@@ -1,21 +1,8 @@
-import { gql, useQuery } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 import { useState } from "react"
 import { Person } from "../types"
 import PersonItem from "./PersonItem"
-
-const FIND_PERSON = gql`
-  query findPersonByName($nameToSearch: String!) {
-    findPerson(name: $nameToSearch) {
-      name
-      phone
-      id
-      address {
-        street
-        city
-      }
-    }
-  }
-`
+import { FIND_PERSON } from "../graphql/person"
 
 interface PersonsProps {
   persons: Array<Person>

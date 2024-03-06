@@ -1,25 +1,7 @@
-import { gql, useMutation } from "@apollo/client"
+import { useMutation } from "@apollo/client"
 import { SyntheticEvent, useState } from "react"
 import InputTextItem from "./InputTextItem"
-
-const CREATE_PERSON = gql`
-  mutation createPerson($name: String!, $street: String!, $city: String!, $phone: String!) {
-    addPerson (
-      name: $name,
-      street: $street,
-      city: $city,
-      phone: $phone
-    ) {
-      name
-      phone
-      id
-      address {
-        street
-        city
-      }
-    }
-  }
-`
+import { ALL_PERSONS, CREATE_PERSON } from "../graphql/person"
 
 const PersonForm = () => {
   const [name, setName] = useState('')
@@ -27,7 +9,10 @@ const PersonForm = () => {
   const [street, setStreet] = useState('')
   const [city, setCity] = useState('')
 
-  const [ createPerson ] = useMutation(CREATE_PERSON)
+  const [ createPerson ] = useMutation(CREATE_PERSON, {
+    // Re-query fetching all persons again once the addition of new person is complete
+    refetchQueries: [ { query: ALL_PERSONS }]
+  })
 
   const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault()
