@@ -20,6 +20,11 @@ const ChangeNumberForm = ({ setError }: ChangeNumberFormProps) => {
     setPhone('')
   }
 
+  useEffect(() => {
+    if (result.data && result.data.editNumber === null) {
+      setError('person not found')
+    }
+  }, [result.data])
   
   return (
     <div>
