@@ -3,7 +3,11 @@ import { SyntheticEvent, useState } from "react"
 import InputTextItem from "./InputTextItem"
 import { ALL_PERSONS, CREATE_PERSON } from "../graphql/person"
 
-const PersonForm = () => {
+interface PersonFormProps {
+  setError: (message: string) => void
+}
+
+const PersonForm = ({ setError } : PersonFormProps) => {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [street, setStreet] = useState('')
@@ -11,7 +15,12 @@ const PersonForm = () => {
 
   const [ createPerson ] = useMutation(CREATE_PERSON, {
     // Re-query fetching all persons again once the addition of new person is complete
-    refetchQueries: [ { query: ALL_PERSONS }]
+    refetchQueries: [ { query: ALL_PERSONS }],
+    // Error handler
+    onError: error => {
+      const messages = error.graphQLErrors.map(e => e.message).join('\n')
+      setError(messages)
+    }
   })
 
   const handleSubmit = (event: SyntheticEvent) => {
