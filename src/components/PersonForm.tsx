@@ -29,10 +29,10 @@ const PersonForm = () => {
     <div>
       <h2>create new</h2>
       <form onSubmit={handleSubmit}>
-        <InputTextItem label="name" setValue={setName} />
-        <InputTextItem label="phone" setValue={setPhone} />
-        <InputTextItem label="street" setValue={setStreet} />
-        <InputTextItem label="city" setValue={setCity} />
+        <InputTextItem label="name" value={name} setValue={setName} />
+        <InputTextItem label="phone" value={phone} setValue={setPhone} />
+        <InputTextItem label="street" value={street} setValue={setStreet} />
+        <InputTextItem label="city" value={city} setValue={setCity} />
         <button type="submit">submit</button>
       </form>
     </div>

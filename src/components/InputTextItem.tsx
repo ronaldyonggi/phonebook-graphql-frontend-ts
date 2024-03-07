@@ -1,13 +1,14 @@
 interface InputTextItemProps {
   label: string
+  value: string
   setValue: React.Dispatch<React.SetStateAction<string>>
 }
 
-const InputTextItem = ({label, setValue}: InputTextItemProps) => {
+const InputTextItem = ({label, value, setValue}: InputTextItemProps) => {
   return (
     <div>
       {label}
-      <input type="text" onChange={e => setValue(e.target.value)} />
+      <input type="text" value={value} onChange={e => setValue(e.target.value)} />
     </div>
   )
 }
