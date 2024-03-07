@@ -4,6 +4,7 @@ import PersonForm from './components/PersonForm';
 import { ALL_PERSONS } from './graphql/person';
 import { useState } from 'react';
 import ErrorNotification from './components/ErrorNotification';
+import ChangeNumberForm from './components/ChangeNumberForm';
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -25,6 +26,7 @@ const App = () => {
       <ErrorNotification message={errorMessage} />
       <Persons persons={result.data.allPersons} />
       <PersonForm setError={notificationHelper} />
+      <ChangeNumberForm setError={notificationHelper} />
     </div>
   );
 };
